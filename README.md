@@ -29,14 +29,14 @@ Build Kernel.C into a object
 $ gcc -m32 -c kernel.c -o kernel.o
 ```
 
-Build Keyboard.C and Source.C
+Build keyboard.c and source.c
 ```
-$ gcc -m32 -c Keyboard.c -o Keyboard.o
-$ gcc -m32 -c Source.c -o Source.o
+$ gcc -m32 -c keyboard.c -o keyboard.o
+$ gcc -m32 -c source.c -o source.o
 ```
 Link everything into one executable
 ```
-$ ld -m elf_i386 -T linker.ld -o kernel boot.o kernel.o Keyboard.o Source.o
+$ ld -m elf_i386 -T linker.ld -o kernel boot.o kernel.o keyboard.o source.o
 ```
 ### Build the .iso
 
@@ -46,3 +46,9 @@ cp kernel iso/boot/
 cp grub.cfg iso/boot/grub/
 grub-mkrescue -o my-kernel.iso iso/
 ```
+
+### Test with qemu
+```
+qemu-system-x86_64 -boot d -cdrom my-kernel.iso -m 512
+```
+
